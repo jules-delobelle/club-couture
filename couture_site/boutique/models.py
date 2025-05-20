@@ -5,7 +5,7 @@ from django.db import models
 class Cotisant(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    emails = models.EmailField(unique=True)
+    email = models.EmailField(unique=True)
     solde = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
 
     def __str__(self):

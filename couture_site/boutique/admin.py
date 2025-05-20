@@ -19,7 +19,7 @@ class ProduitAdmin(admin.ModelAdmin):
 
 @admin.register(Achat)
 class AchatAdmin(admin.ModelAdmin):
-    list_display = ("prod uit", "cotisant", "date", "quantite")
+    list_display = ("produit", "cotisant", "date", "quantite")
     list_filter = ("date","produit")
     search_fields = ("cotisant__nom", "produit__nom")
     date_hierarchy = "date"
