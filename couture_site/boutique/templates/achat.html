@@ -1,0 +1,50 @@
+<!-- achat.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Achat de produits</title>
+</head>
+<body>
+    <h1>Achat de produits</h1>
+
+    <!-- Messages Django (succès, erreur, etc.) -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Formulaire d'achat -->
+    <form method="post" aria-label="Formulaire d'achat de produits">
+        {% csrf_token %}
+        
+        <!-- Affichage des erreurs de formulaire -->
+        {% if form.non_field_errors %}
+            <div class="form-errors">
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        {{ form.as_p }}
+        <button type="submit" aria-label="Acheter les produits">Acheter</button>
+    </form>
+
+    <!-- Liste des produits disponibles -->
+    <h2>Produits disponibles</h2>
+    <ul>
+        {% for produit in produits %}
+            <li>{{ produit.nom }} - {{ produit.prix }} € - Stock : {{ produit.stock }}</li>
+        {% empty %}
+            <li>Aucun produit disponible.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+<!-- achat.html -->

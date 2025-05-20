@@ -3,6 +3,24 @@ from .models import Cotisant, Produit, Achat
 
 # Register your models here.
 
-admin.site.register(Cotisant)
-admin.site.register(Produit)
-admin.site.register(Achat)
+@admin.register(Cotisant)
+class CotisantAdmin(admin.ModelAdmin):
+    list_display = ("nom", "prenom", "email", "solde")
+    search_fields = ("nom", "prenom", "email")
+    list_filter = ("solde",)
+    ordering = ("nom",)
+
+@admin.register(Produit)
+class ProduitAdmin(admin.ModelAdmin):
+    list_display = ("nom", "prix", "stock")
+    list_editable = ("prix", "stock")
+    search_fields = ("nom",)
+    ordering = ("nom",)
+
+@admin.register(Achat)
+class AchatAdmin(admin.ModelAdmin):
+    list_display = ("prod uit", "cotisant", "date", "quantite")
+    list_filter = ("date","produit")
+    search_fields = ("cotisant__nom", "produit__nom")
+    date_hierarchy = "date"
+    ordering = ("-date",)
