@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import login
 from .models import Cotisant, Produit, Achat
-from .forms import AchatForm
+from .forms import AchatForm, UserRegisterForm
 
 # Create your views here.
 
@@ -30,3 +31,21 @@ def acheter_produit(request):
         "produits": produits,
     }
     return render(request, "achat.html", context)
+
+
+def inscription(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            prenom = form.cleaned_data["first_name"]
+            nom = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            cotisant = Cotisant(user=user, nom=nom, prenom=prenom, email=email, solde = 20)
+            cotisant.save()
+            messages.success(request, "Votre compte a été créé avec succès.")
+            login(request, user)
+            return redirect("accueil")
+    else:
+        form = UserRegisterForm()
+    return render(request, "inscription.html", {"form": form})

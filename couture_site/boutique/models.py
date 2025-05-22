@@ -1,15 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Cotisant(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
     solde = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = user.email
 
     def __str__(self):
-        return f"{self.nom.upper} {self.prenom.capitalize} ({self.solde})"
+        return f"{self.nom.upper()} {self.prenom.capitalize()} ({self.solde} crédits)"
+
     
 class Produit(models.Model):
     nom = models.CharField(max_length=100)
