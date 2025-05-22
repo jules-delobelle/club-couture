@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import login
 from .models import Cotisant, Produit, Achat
 from .forms import AchatForm, UserRegisterForm
+from django.views import View
+from django.contrib.auth.views import LoginView, LogoutView
 
 # Create your views here.
 
@@ -49,3 +51,5 @@ def inscription(request):
     else:
         form = UserRegisterForm()
     return render(request, "inscription.html", {"form": form})
+
+
