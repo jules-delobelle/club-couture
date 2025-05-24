@@ -5,13 +5,12 @@ from .enums import ProductCategory
 # Create your models here.
 
 class Cotisant(models.Model):
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    solde = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = User.email
+    solde = models.DecimalField(max_digits=7, decimal_places=2, default=0.0)
+
     def __str__(self):
-        return f"{self.nom.upper()} {self.prenom.capitalize()} ({self.solde} crédits)"
+        return f"{self.user.last_name.upper()} {self.user.first_name.capitalize()} ({self.solde} crédits)"
+
 
     
 class Produit(models.Model):

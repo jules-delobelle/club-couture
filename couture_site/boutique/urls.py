@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import acheter_produit, inscription, LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView
+from .views import acheter_produit, inscription
+
 
 urlpatterns = [
     path('acheter/', acheter_produit, name='acheter'),

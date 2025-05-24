@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Inscription</title>
+    <title>Connexion</title>
 </head>
 <body>
 
-    <h1>Créer un compte</h1>
+    <h1>Connexion</h1>
 
-    <!-- Affiche les messages (succès, erreur, etc.) -->
+    <!-- Affichage des messages (ex : erreur de login) -->
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -17,14 +17,14 @@
         </ul>
     {% endif %}
 
-    <!-- Formulaire d'inscription -->
+    <!-- Formulaire de connexion -->
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">S'inscrire</button>
+        <button type="submit">Se connecter</button>
     </form>
 
-    <p>Déjà inscrit ? <a href="{% url 'connexion' %}">Se connecter</a></p>
+    <p>Pas encore de compte ? <a href="{% url 'inscription' %}">Créer un compte</a></p>
 
 </body>
 </html>

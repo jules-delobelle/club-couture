@@ -8,14 +8,15 @@ class AchatForm(forms.Form):
     quantite = forms.IntegerField(min_value=1, label="Quantité")
 
 class UserRegisterForm(UserCreationForm):
-    prenom = forms.CharField(max_length=100, label="Prénom")
-    nom = forms.CharField(max_length=100, label="Nom")
-    email = forms.EmailField(label="Email")
-    mdp = forms.CharField(widget=forms.PasswordInput, label="Mot de passe")
-    mdp2 = forms.CharField(widget=forms.PasswordInput, label="Confirmer le mot de passe")
-    
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        labels = {
+            'first_name': 'Prénom',
+            'last_name': 'Nom',
+            'password1': 'Mot de passe',
+            'password2': 'Confirmer le mot de passe',
+        }
+
 
 

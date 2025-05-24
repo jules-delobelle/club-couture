@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login
+from django.views.csrf import csrf_failure
 from .models import Cotisant, Produit, Achat
 from .forms import AchatForm, UserRegisterForm
-from django.views import View
-from django.contrib.auth.views import LoginView, LogoutView
 
 # Create your views here.
 
@@ -40,10 +39,7 @@ def inscription(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            prenom = form.cleaned_data["first_name"]
-            nom = form.cleaned_data["last_name"]
-            email = form.cleaned_data["email"]
-            cotisant = Cotisant(user=user, nom=nom, prenom=prenom, email=email, solde = 20)
+            cotisant = Cotisant(user=user, solde = 20)
             cotisant.save()
             messages.success(request, "Votre compte a été créé avec succès.")
             login(request, user)
