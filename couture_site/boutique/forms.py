@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Produit
+from .models import Produit, Cotisant
 
 class AchatForm(forms.Form):
     produit = forms.ModelChoiceField(queryset=Produit.objects.filter(stock__gt=0), label="Produit")
@@ -17,6 +17,8 @@ class UserRegisterForm(UserCreationForm):
             'password1': 'Mot de passe',
             'password2': 'Confirmer le mot de passe',
         }
+
+    cotisant = Cotisant()
 
 
 
