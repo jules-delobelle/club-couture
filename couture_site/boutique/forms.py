@@ -18,7 +18,4 @@ class UserRegisterForm(UserCreationForm):
             'password2': 'Confirmer le mot de passe',
         }
 
-    cotisant = Cotisant()
-
-
 
