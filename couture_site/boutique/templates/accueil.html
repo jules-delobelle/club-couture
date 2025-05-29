@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil - Club Couture</title>
+</head>
+<body>
+
+    <h1>Bienvenue sur le site du Club Couture</h1>
+
+    <p>
+        Ce site vous permet de gérer votre compte, acheter des produits, et suivre vos crédits.<br>
+        Utilisez le menu pour accéder à vos fonctionnalités.
+    </p>
+
+    <ul>
+        <li><a href="{% url 'connexion' %}">Connexion</a></li>
+        <li><a href="{% url 'inscription' %}">Inscription</a></li>
+        <li><a href="{% url 'mon_compte' %}">Mon compte</a></li>
+        <li><a href="{% url 'acheter' %}">Acheter un produit</a></li>
+    </ul>
+
+</body>
+</html>

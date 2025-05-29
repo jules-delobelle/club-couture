@@ -50,7 +50,11 @@ def inscription(request):
 
 @login_required
 def mon_compte(request):
-    cotisant = request.user.cotisant
+    try:
+        cotisant = request.user.cotisant
+    except:
+        messages.error(request, "Votre compte n'est pas encore activé, contactez le support")
+        return redirect("accueil")
     achats = Achat.objects.filter(cotisant=cotisant)
 
     context = {
