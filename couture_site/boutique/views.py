@@ -64,4 +64,7 @@ def mon_compte(request):
 
     return render(request, "mon_compte.html", context)
 
+def accueil(request):
+    return render(request, "accueil.html")
+
 
