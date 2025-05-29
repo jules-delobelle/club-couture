@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.views.csrf import csrf_failure
 from .models import Cotisant, Produit, Achat
 from .forms import AchatForm, UserRegisterForm
 
-# Create your views here.
 
 def acheter_produit(request):
     produits = Produit.objects.filter(stock__gt=0)
@@ -24,7 +24,7 @@ def acheter_produit(request):
                 achat = Achat(cotisant=cotisant, produit=produit, quantite=quantite)
                 achat.save()
                 messages.success(request, "Achat effectué avec succès.")
-                return redirect("achat")
+                return redirect("acheter")
     else:
         form = AchatForm()
     context = {
@@ -39,7 +39,7 @@ def inscription(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            cotisant = Cotisant(user=user, solde = 20)
+            cotisant = Cotisant()
             cotisant.save()
             messages.success(request, "Votre compte a été créé avec succès.")
             login(request, user)
@@ -47,5 +47,17 @@ def inscription(request):
     else:
         form = UserRegisterForm()
     return render(request, "inscription.html", {"form": form})
+
+@login_required
+def mon_compte(request):
+    cotisant = request.user.cotisant
+    achats = Achat.objects.filter(cotisant=cotisant)
+
+    context = {
+        "cotisant": cotisant,
+        "achats": achats
+    }
+
+    return render(request, "mon_compte.html", context)
 
 

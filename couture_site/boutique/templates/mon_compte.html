@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon compte</title>
+</head>
+<body>
+
+    <h1>Mon compte</h1>
+
+    <h2>Informations personnelles</h2>
+    <ul>
+        <li>Nom : {{ cotisant.user.last_name }}</li>
+        <li>Prénom : {{ cotisant.user.first_name }}</li>
+        <li>Email : {{ cotisant.user.email }}</li>
+        <li>Solde : {{ cotisant.solde }} crédits</li>
+    </ul>
+
+    <h2>Historique de mes achats</h2>
+    {% if achats %}
+        <ul>
+        {% for achat in achats %}
+            <li>
+                {{ achat.date|date:"d/m/Y H:i" }} — {{ achat.quantite }} x {{ achat.produit.nom }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun achat pour l’instant.</p>
+    {% endif %}
+
+    <p><a href="{% url 'deconnexion' %}">Se déconnecter</a></p>
+    <p><a href="{% url 'acheter' %}">Acheter un produit</a></p>
+
+</body>
+</html>
