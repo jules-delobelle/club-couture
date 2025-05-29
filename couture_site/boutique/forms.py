@@ -10,7 +10,7 @@ class AchatForm(forms.Form):
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
         labels = {
             'first_name': 'Prénom',
             'last_name': 'Nom',

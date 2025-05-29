@@ -29,7 +29,10 @@
         <p>Aucun achat pour l’instant.</p>
     {% endif %}
 
-    <p><a href="{% url 'deconnexion' %}">Se déconnecter</a></p>
+    <form method="post" action="{% url 'deconnexion' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background:none; border:none; color:#007bff; cursor:pointer;">Se déconnecter</button>
+    </form>
     <p><a href="{% url 'acheter' %}">Acheter un produit</a></p>
 
 </body>

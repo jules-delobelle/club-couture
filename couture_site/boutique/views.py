@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.csrf import csrf_failure
 from .models import Cotisant, Produit, Achat
 from .forms import AchatForm, UserRegisterForm
+from unidecode import unidecode
 
 
 def acheter_produit(request):
@@ -38,6 +39,9 @@ def inscription(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            first_name = form.cleaned_data("first_name")
+            last_name = form.cleaned_data("last_name")
+            user.username = unidecode((first_name+last_name).lower())
             user = form.save()
             cotisant = Cotisant()
             cotisant.save()
